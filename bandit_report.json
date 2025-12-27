@@ -1,6 +1,6 @@
 {
   "errors": [],
-  "generated_at": "2025-12-27T13:23:24Z",
+  "generated_at": "2025-12-27T14:51:44Z",
   "metrics": {
     ".\\accounts\\__init__.py": {
       "CONFIDENCE.HIGH": 0,
@@ -116,6 +116,19 @@
       "SEVERITY.MEDIUM": 0,
       "SEVERITY.UNDEFINED": 0,
       "loc": 0,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    ".\\btre\\security_test_examples.py": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 1,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 1,
+      "SEVERITY.LOW": 2,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 21,
       "nosec": 0,
       "skipped_tests": 0
     },
@@ -627,20 +640,100 @@
       "skipped_tests": 0
     },
     "_totals": {
-      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.HIGH": 3,
       "CONFIDENCE.LOW": 0,
-      "CONFIDENCE.MEDIUM": 1,
+      "CONFIDENCE.MEDIUM": 2,
       "CONFIDENCE.UNDEFINED": 0,
-      "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 1,
-      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.HIGH": 1,
+      "SEVERITY.LOW": 3,
+      "SEVERITY.MEDIUM": 1,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 572,
+      "loc": 593,
       "nosec": 0,
       "skipped_tests": 0
     }
   },
   "results": [
+    {
+      "code": "10 API_KEY = \"test_api_key_1234567890abcdefghijklmnopqrstuvwxyz\"\n11 DATABASE_PASSWORD = \"my_super_secret_password_12345\"\n12 \n",
+      "col_offset": 20,
+      "end_col_offset": 52,
+      "filename": ".\\btre\\security_test_examples.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'my_super_secret_password_12345'",
+      "line_number": 11,
+      "line_range": [
+        11
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.2/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "20     # Bandit bu sat\u0131r\u0131 g\u00fcvenlik riski olarak i\u015faretleyecek\n21     result = eval(expression)  # noqa: B307\n22     return result\n",
+      "col_offset": 13,
+      "end_col_offset": 29,
+      "filename": ".\\btre\\security_test_examples.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of possibly insecure function - consider using safer ast.literal_eval.",
+      "line_number": 21,
+      "line_range": [
+        21
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b307-eval",
+      "test_id": "B307",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "25 # subprocess ile shell=True kullan\u0131m\u0131 g\u00fcvenlik riski olu\u015fturur\n26 import subprocess\n27 \n",
+      "col_offset": 0,
+      "end_col_offset": 17,
+      "filename": ".\\btre\\security_test_examples.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 26,
+      "line_range": [
+        26
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "33     # Bandit bu sat\u0131r\u0131 g\u00fcvenlik riski olarak i\u015faretleyecek\n34     subprocess.call(user_input, shell=True)  # noqa: B602\n35 \n",
+      "col_offset": 4,
+      "end_col_offset": 43,
+      "filename": ".\\btre\\security_test_examples.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "HIGH",
+      "issue_text": "subprocess call with shell=True identified, security issue.",
+      "line_number": 34,
+      "line_range": [
+        34
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.2/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
     {
       "code": "22 # SECURITY WARNING: keep the secret key used in production secret!\n23 SECRET_KEY = 'ubsq#xai!qa_!dsi=61a&mbqn)lxtl*x48$fi0v-l^k%0z1^bn'\n24 \n",
       "col_offset": 13,
